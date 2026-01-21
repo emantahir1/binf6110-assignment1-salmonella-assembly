@@ -1,0 +1,1 @@
+# binf6110-assignment1-salmonella-assembly
