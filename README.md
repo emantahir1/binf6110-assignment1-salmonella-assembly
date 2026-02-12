@@ -230,14 +230,26 @@ Schiffer, A. M., Rahman, A., Sutton, W., Putnam, M. L., & Weisberg, A. J. (2025)
 
 ### Software and Tools
 
-Flye v2.9.6: Genome assembly - [https://github.com/fenderglass/Flye](https://github.com/fenderglass/Flye)
-Minimap2 v2.30: Read alignment - [https://github.com/lh3/minimap2](https://github.com/lh3/minimap2)
-Samtools v1.22: BAM file processing - [https://github.com/samtools/samtools](https://github.com/samtools/samtools)
-Bcftools v1.16: Variant calling - [https://github.com/samtools/bcftools](https://github.com/samtools/bcftools)
-IGV v2.16: Genome visualization - [https://software.broadinstitute.org/software/igv/](https://software.broadinstitute.org/software/igv/)
-R v4.3.1: Statistical analysis and visualization
-ggplot2 v4.0.2: Data visualization
-patchwork v1.2.1: Multi-panel figure assembly
+* **Flye v2.9.6** — Genome assembly
+  [https://github.com/fenderglass/Flye](https://github.com/fenderglass/Flye)
+
+* **Minimap2 v2.30** — Read alignment
+  [https://github.com/lh3/minimap2](https://github.com/lh3/minimap2)
+
+* **Samtools v1.22** — BAM file processing
+  [https://github.com/samtools/samtools](https://github.com/samtools/samtools)
+
+* **Bcftools v1.16** — Variant calling
+  [https://github.com/samtools/bcftools](https://github.com/samtools/bcftools)
+
+* **IGV v2.16** — Genome visualization
+  [https://software.broadinstitute.org/software/igv/](https://software.broadinstitute.org/software/igv/)
+
+* **R v4.3.1** — Statistical analysis and visualization
+
+* **ggplot2 v4.0.2** — Data visualization
+
+* **patchwork v1.2.1** — Multi-panel figure assembly
 
 All analyses were performed in a conda environment (binf6110_env) on Ubuntu 24.04.
 
