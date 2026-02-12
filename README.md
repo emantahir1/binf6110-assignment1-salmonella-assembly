@@ -19,18 +19,97 @@ In this project, a *Salmonella enterica* genome is assembled using Oxford Nanopo
 
 ## 2. Proposed Methods
 
-### Data Acquisition and Quality Control  
-Raw sequencing data for *Salmonella enterica* will be retrieved from the NCBI Sequence Read Archive. The dataset consists of long reads generated using Oxford Nanopore R10 chemistry. Initial quality control will be performed using **seqtk (v1.5)** to confirm basic FASTQ integrity and summarize read characteristics (Heng Li, 2020). Specifically, seqtk will be used to verify that the FASTQ file can be parsed correctly and contains the expected number of reads, summarize read length distributions, and summarize per-read quality score distributions. Read length summary statistics will include estimation of the read N50, and quality summaries will be used to confirm that the dataset meets the expected Q20+ standard for high-quality long-read assembly. These QC checks ensure the input data are suitable for downstream assembly.
+### Data Acquisition
+Oxford Nanopore R10.4 long-read sequencing data for Salmonella enterica were obtained from NCBI Sequence Read Archive under accession SRR32410565. The dataset consists of 196,031 reads with a median length of 4,683 bp and total yield of 809 Mb, providing approximately 160× coverage of the expected 5 Mb genome. Reference genome S. enterica subsp. enterica serovar Typhimurium str. LT2 (GCF_000006945.2) was downloaded from NCBI RefSeq, consisting of chromosome NC_003197.2 (4,857,450 bp) and plasmid NC_003277.2 (93,933 bp).
 
-### Genome Assembly  
-De novo genome assembly will be performed using **Flye (v2.9)**, a long-read assembler designed for error-prone long-read sequencing data and commonly used for bacterial genome assembly (Kolmogorov, 2024). Flye will be run using the `--nano-hq` option to optimize assembly for high-accuracy Nanopore reads, and multithreading will be enabled using `--threads 8` to improve computational efficiency (Kolmogorov, 2024). All other parameters will be kept at their default settings unless QC results suggest that filtering or parameter adjustments are necessary.
+### Genome Assembly
+De novo assembly was performed using Flye v2.9.6, optimized for high-accuracy nanopore reads: bashflye --nano-hq salmonella_reads.fastq --out-dir flye_output --threads 8 Flye uses a repeat-graph assembly algorithm specifically designed to handle long, error-prone reads while resolving repetitive genomic regions (Kolmogorov et al., 2019). The --nano-hq parameter applies error models appropriate for R10.4 Q20+ chemistry.
 
-### Reference Alignment and Visualization  
-To evaluate the assembly, the resulting contigs will be aligned to a standard *Salmonella enterica* reference genome obtained from NCBI RefSeq. Alignment will be performed using **Minimap2 (v2.25)**, which is optimized for fast and accurate alignment of long sequences (Li, 2022). The alignment will be generated in SAM format using the Nanopore-optimized preset (`-ax map-ont`) (Li, 2022).
+### Reference Alignment
+Raw nanopore reads were aligned to the reference genome using minimap2 v2.30, a fast alignment tool optimized for long reads: bashminimap2 -ax lr:hq -t 8 salmonella_ref.fasta salmonella_reads.fastq > reads_aligned.sam The lr:hq preset applies alignment parameters tuned for high-quality long reads. SAM output was converted to sorted, indexed BAM format for downstream analysis: bashsamtools view -bS reads_aligned.sam | samtools sort -o reads_sorted.bam samtools index reads_sorted.bam samtools faidx salmonella_ref.fasta Alignment statistics were extracted using samtools coverage to evaluate breadth and depth of coverage across reference contigs.
 
-Alignment files will then be processed using **Samtools (v1.23)** (samtools, 2020). The SAM file will be converted to BAM, sorted by genomic coordinates, and indexed to support efficient visualization. The finalized BAM alignment will be visualized using the **Integrative Genomics Viewer (IGV v2.19.7)** to inspect overall coverage patterns, evaluate structural consistency between the assembly and the reference, and examine representative regions for potential discrepancies (igvteam, 2025).
+### Variant Calling
+Genetic variants were identified using Bcftools v1.16, a widely-used variant caller suitable for bacterial haploid genomes: bashbcftools mpileup -Ou -f salmonella_ref.fasta reads_sorted.bam | \ bcftools call -mv -Ob -o reads_variants.bcf bcftools view reads_variants.bcf > reads_variants.vcf
+ ariants were classified as SNPs (single nucleotide polymorphisms), insertions, or deletions based on reference and alternate allele lengths. Variant density was calculated as variants per kilobase for each reference contig.
 
-Together, these steps form a complete long-read genome assembly and validation workflow, transforming raw Oxford Nanopore sequencing reads into a coherent *Salmonella enterica* genome assembly that can be evaluated against a trusted reference sequence.
+### Data Visualization
+Assembly quality metrics were visualized using R v4.3.1 with ggplot2 and patchwork packages. Coverage and variant distributions were plotted to assess genome-wide patterns. Individual variants were examined in Integrative Genomics Viewer (IGV v2.16) by loading the reference genome, BAM alignment file, and VCF variant file.
+
+## Results
+
+### Assembly Quality
+The Flye assembler produced a high-quality draft genome consisting of 3 contigs with a total length of 5,104,813 bp (Figure 1A). The largest contig (contig_1) spans 3.32 Mb with 153× sequencing coverage, while contig_2 is 1.68 Mb with 169× coverage. A small circular contig (contig_4) of 109 kb with 245× coverage was identified, consistent with plasmid DNA. The assembly achieved an excellent N50 of 3.32 Mb, indicating high contiguity (Figure 1D).
+Topology analysis revealed one circular contig representing the plasmid element, while the two larger contigs remain linear, likely representing chromosomal fragments separated by repetitive regions (Figure 1C). Mean assembly coverage of 160× provides robust support for variant calling and structural analysis.
+
+Figure 1: Genome Assembly Quality Assessment. De novo assembly with Flye produced 3 contigs totaling 5.10 Mb. (A) Contig lengths show two large chromosomal contigs (3.32 Mb and 1.68 Mb) and one small plasmid (0.11 Mb). (B) Sequencing coverage per contig ranges from 153× to 245×, with highest coverage on the plasmid. (C) Topology analysis identified one circular contig (plasmid). (D) Assembly summary statistics demonstrate high quality with N50 = 3.32 Mb and mean coverage 160×.
+
+### Reference Alignment Quality
+Alignment of raw reads to the S. enterica LT2 reference genome revealed substantial differences in coverage between chromosome and plasmid (Figure 2). The reference chromosome achieved 97.8% breadth of coverage with a mean depth of 151× and mapping quality (MAPQ) of 60, indicating high-confidence alignments across nearly the entire chromosome (Figure 2A,B,C). A total of 182,768 reads aligned to the chromosomal sequence (Figure 2D).
+In contrast, the reference plasmid pSLT showed only 43.1% breadth of coverage despite adequate sequencing depth (82×) in aligned regions (Figure 2A,B). Mapping quality for plasmid-aligned reads was lower (MAPQ 45), and only 3,101 reads aligned to the plasmid reference (Figure 2C,D). This fragmented coverage pattern suggests the plasmid in the sequenced strain differs substantially from the pSLT reference.
+
+Figure 2: Reference Alignment Quality Assessment. Raw reads were aligned to the S. enterica LT2 reference genome (chromosome NC_003197.2 and plasmid NC_003277.2). (A) Reference genome coverage shows 97.8% for chromosome but only 43.1% for plasmid, indicating plasmid divergence. (B) Mean sequencing depth is 151× for chromosome and 82× for plasmid in covered regions. (C) Mapping quality scores are high for chromosome (MAPQ 60) but reduced for plasmid (MAPQ 45). (D) 182,768 reads aligned to chromosome compared to only 3,101 to plasmid.
+
+### Variant Distribution and Density
+Variant calling identified 11,465 total variants across the genome, with 98.6% being SNPs (11,302), 1.1% insertions (125), and 0.3% deletions (38) (Figure 3C). However, variant distribution was highly uneven between chromosome and plasmid. The chromosome contained 4,398 variants across 4.86 Mb, yielding a density of 0.9 variants per kb (Figure 3A,B). This low variant density is consistent with strain-level polymorphism relative to the reference LT2 strain. In stark contrast, the plasmid harbored 7,067 variants across only 0.09 Mb, producing an extraordinary variant density of 78.52 variants per kb—87-fold higher than the chromosome (Figure 3B). Variant type distribution was similar between chromosome and plasmid, with SNPs dominating in both cases (Figure 3D). This extreme plasmid variant density, combined with fragmented coverage (Figure 2A), strongly suggests the assembled plasmid represents a divergent incompatibility group rather than genuine point mutations across pSLT.
+
+Figure 3: Variant Landscape Analysis. Variant calling using Bcftools identified 11,465 total variants genome-wide. (A) Total variant counts show 4,398 on chromosome and 7,067 on plasmid despite the plasmid being 54× smaller. (B) Variant density reveals 0.9 variants/kb on chromosome but 78.52 variants/kb on plasmid—an 87-fold difference indicating plasmid divergence rather than true polymorphism. (C) Genome-wide variant composition is 98.6% SNPs. (D) Variant type distribution by contig shows SNPs dominate in both chromosome and plasmid.
+
+### Visual Inspection of Variants
+Genome-wide visualization in IGV confirmed relatively sparse variant distribution across the chromosome with clusters of moderate density in certain regions (Figure 4). Coverage depth appears uniform across most of the chromosome, consistent with alignment statistics (Figure 2B).
+
+Figure 4: Genome-Wide Coverage and Variant Distribution. IGV visualization of chromosome NC_003197.2 showing variant positions (top track) and coverage depth (middle track). Variants are distributed across the chromosome with some regional clustering. Coverage remains relatively uniform at ~150× depth across most positions.
+Detailed examination of a variant-rich chromosomal region (2.36-2.37 Mb) revealed multiple well-supported SNPs with high read coverage (Figure 5). Individual variant sites show consistent support from multiple overlapping reads, indicating genuine sequence differences rather than sequencing errors.
+
+Figure 5: Variant-Rich Chromosomal Region. IGV view of NC_003197.2 positions 2,360,000-2,365,000 showing multiple SNPs (purple 'I' markers in alignment tracks) supported by consistent read evidence. Coverage track shows uniform depth (~150×) across the region.
+High-resolution inspection of individual variants confirmed base-level support for variant calls (Figure 6). At position 64,010, a clear C→T SNP is visible with consistent support from all overlapping reads. Additional variants at nearby positions show clean SNP patterns (T→G, G→T, T→A), validating the quality of variant calls.
+
+Figure 6: Single Variant Detail View. IGV visualization at nucleotide resolution showing multiple SNPs near position 64,010. Blue and red colored boxes in coverage track indicate mismatches relative to reference. Read alignment tracks show consistent variant alleles (colored letters: C, T, G, A) across all supporting reads, confirming genuine sequence polymorphisms.
+
+## Discussion
+
+### Assembly Quality and Completeness
+The Flye assembly successfully reconstructed the Salmonella enterica genome into three contigs totaling 5.10 Mb with excellent contiguity (N50 = 3.32 Mb). The chromosome remains fragmented into two linear contigs, likely separated by a repetitive region that was filtered during assembly due to low coverage (25× at the junction). This is a common limitation of long-read assemblers when encountering highly repetitive DNA or collapsed repeats. Despite fragmentation, the assembly covers 97.8% of the reference chromosome with high fidelity.
+High sequencing coverage (160× mean) provided robust support for both assembly and variant calling. The 245× coverage on the circular plasmid contig suggests either higher copy number or preferential sequencing of smaller DNA fragments. Detection of circularity for the plasmid contig confirms successful assembly of an autonomous replicon.
+
+### Chromosomal Variants: Strain-Level Polymorphism
+The 4,398 chromosomal variants (0.9 per kb) represent genuine strain-level differences between the sequenced isolate and the reference LT2 strain. This level of divergence is consistent with intraspecies variation within S. enterica serovars (Robertson et al., 2023). The dominance of SNPs (98.6%) over indels reflects typical mutational patterns in bacterial evolution, where point mutations accumulate more frequently than insertion-deletion events.
+IGV visualization confirmed that chromosomal variants are well-supported by multiple reads with high mapping quality (MAPQ 60), distinguishing true polymorphisms from sequencing errors. Variants appear distributed across the chromosome with some regional clustering, possibly reflecting horizontal gene transfer events, mobile elements, or regions under diversifying selection.
+
+### Plasmid Divergence: Evidence for a Different Incompatibility Group
+The most striking finding is the extreme plasmid divergence. Three independent lines of evidence demonstrate that the assembled plasmid is not pSLT but rather a different plasmid element:
+
+Low reference coverage (43.1%): Less than half of pSLT aligns to the assembly, with large gaps indicating absent or highly divergent regions.
+Extreme variant density (78.52 per kb, 87× higher than chromosome): This density is biologically implausible as true point mutations. Instead, it reflects misalignments when forcing reads from a divergent plasmid onto an incorrect reference.
+Reduced mapping quality (MAPQ 45 vs 60): Lower confidence alignments indicate the aligner struggled to place plasmid reads, consistent with sequence divergence.
+
+McClelland et al. (2001) showed that pSLT is specific to certain S. enterica serovars and shares limited homology with plasmids from other serovars. Robertson et al. (2023) catalogued 1,044 distinct plasmid MOB-clusters across Salmonella, with 22% carrying antimicrobial resistance genes. The divergent plasmid in this strain likely belongs to a different incompatibility group or MOB-cluster.
+The 109 kb assembled plasmid is larger than pSLT (94 kb), suggesting different gene content. Given that 88.3% of broad-host-range Salmonella plasmids are mobilizable (Robertson et al., 2023), this plasmid may play a role in horizontal gene transfer. Future work should annotate the assembled plasmid to identify resistance determinants, virulence factors, or mobile elements.
+
+### Workflow Strengths and Limitations
+#### Strengths:
+High-quality long-read data (Q20+, 160× coverage) enabled robust assembly
+Minimap2 alignment efficiently mapped 97.8% of chromosome with high confidence
+Bcftools variant calling identified well-supported SNPs and indels
+Multi-scale visualization (genome-wide, regional, base-level) validated results
+
+#### Limitations:
+Chromosome remains fragmented due to repetitive sequences
+Bcftools is a traditional variant caller; machine learning tools like Clair3 may improve sensitivity
+Plasmid divergence prevented accurate variant characterization using the pSLT reference
+No functional annotation was performed to interpret variant consequences
+
+### Biological and Clinical Implications
+The presence of a divergent plasmid has potential clinical relevance. Salmonella plasmids frequently carry antimicrobial resistance genes, and conjugative plasmids enable rapid dissemination across strains and serovars (Laidlaw et al., 2024). Robertson et al. (2023) documented multi-plasmid AMR outbreaks, emphasizing the importance of plasmid surveillance.
+
+Future experiments should:
+Annotate the assembled plasmid to identify resistance and virulence genes
+Determine plasmid incompatibility group and MOB-type
+Assess conjugation potential and host range
+Compare with plasmid databases to identify related elements
+
+
+## Conclusions
+This analysis successfully assembled and characterized a Salmonella enterica genome using Oxford Nanopore long-read sequencing. The assembly achieved high contiguity (N50 = 3.32 Mb) and identified 11,465 variants relative to the reference genome. Chromosomal variants represent typical strain-level polymorphism, while extreme plasmid divergence indicates the presence of a different plasmid element from a distinct incompatibility group. These findings demonstrate the power of long-read sequencing for bacterial genomics and highlight the importance of plasmid diversity in Salmonella populations.
 
 ---
 
@@ -63,3 +142,17 @@ Oxford Nanopore Technologies. (2020). R10.3: the newest nanopore for high accura
 samtools. (2020). *samtools/samtools*. GitHub. https://github.com/samtools/samtools
 
 Schiffer, A. M., Rahman, A., Sutton, W., Putnam, M. L., & Weisberg, A. J. (2025). A comparison of short- and long-read whole-genome sequencing for microbial pathogen epidemiology. *mSystems*, 10(12), e01426-25. https://doi.org/10.1128/msystems.01426-25
+
+### Software and Tools
+Flye v2.9.6: Genome assembly - https://github.com/fenderglass/Flye
+Minimap2 v2.30: Read alignment - https://github.com/lh3/minimap2
+Samtools v1.22: BAM file processing - https://github.com/samtools/samtools
+Bcftools v1.16: Variant calling - https://github.com/samtools/bcftools
+IGV v2.16: Genome visualization - https://software.broadinstitute.org/software/igv/
+R v4.3.1: Statistical analysis and visualization
+ggplot2 v4.0.2: Data visualization
+patchwork v1.2.1: Multi-panel figure assembly
+
+All analyses were performed in a conda environment (binf6110_env) on Ubuntu 24.04.
+
+Data Availability: Raw sequencing data available at NCBI SRA (SRR32410565). Analysis code and processed results available in GitHub repository.
