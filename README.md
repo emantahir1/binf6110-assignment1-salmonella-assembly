@@ -1,4 +1,4 @@
-# Assignment 1 – Part 1  
+# Assignment 1  
 ## Genome Assembly of *Salmonella enterica*
 
 ## 1. Introduction
