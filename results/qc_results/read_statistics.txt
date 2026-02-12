@@ -1,0 +1,2 @@
+file	format	type	num_seqs	sum_len	min_len	avg_len	max_len	Q1	Q2	Q3	sum_gap	N50	N50_num	Q20(%)	Q30(%)	AvgQual	GC(%)	sum_n
+salmonella_reads.fastq	FASTQ	DNA	196031	809296219	9	4128.4	58041	2894	3957	5220	0	4683	4588	89	83	18.91	52.18	0
