@@ -1,7 +1,7 @@
 #!/bin/bash
 # Salmonella enterica Genome Assembly and Variant Analysis
 # BINF6110 Assignment 1 Part 2
-# Author: [Your Name]
+# Author: Eman Tahir
 # Date: February 12, 2026
 
 set -e  # Exit on error
