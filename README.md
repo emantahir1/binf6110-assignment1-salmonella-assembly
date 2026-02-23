@@ -79,7 +79,7 @@ Variants were classified as SNPs (single nucleotide polymorphisms), insertions, 
 
 ### Data Visualization
 
-Assembly quality metrics were visualized using R v4.3.1 with ggplot2 and patchwork packages. Coverage and variant distributions were plotted to assess genome-wide patterns. Individual variants were examined in Integrative Genomics Viewer (IGV v2.16) by loading the reference genome, BAM alignment file, and VCF variant file.
+Assembly quality metrics were visualized using R v4.3.1 with base R graphics. Coverage and variant distributions were plotted to assess genome-wide patterns. Individual variants were examined in Integrative Genomics Viewer (IGV v2.16) by loading the reference genome, BAM alignment file, and VCF variant file.
 
 ### Gene Identification and Plasmid Characterization
 
@@ -132,7 +132,7 @@ The chromosome's high coverage and mapping quality indicate that the sequenced s
 
 Variant calling identified 11,465 total variants across the genome, with 98.6% being SNPs (11,302), 1.1% insertions (125), and 0.3% deletions (38). However, variant distribution was highly uneven between chromosome and plasmid. The chromosome contained 4,398 variants across 4.86 Mb, yielding a density of 0.9 variants per kb. This low variant density is consistent with strain-level polymorphism relative to the reference LT2 strain.
 
-In stark contrast, the plasmid harbored 7,067 variants across only 0.09 Mb, producing an extraordinary variant density of 78.52 variants per kb—87-fold higher than the chromosome (Figure 2). This extreme plasmid variant density, combined with fragmented coverage (Table 1), strongly suggests the assembled plasmid represents a divergent incompatibility group rather than genuine point mutations across pSLT.
+In stark contrast, the plasmid harbored 7,067 variants across only 0.09 Mb, producing an extraordinary variant density of 78.52 variants per kb—87-fold higher than the chromosome (Figure 2). This extreme plasmid variant density, combined with fragmented coverage (Table 2), strongly suggests the assembled plasmid represents a divergent incompatibility group rather than genuine point mutations across pSLT.
 
 ![Figure 2: Variant Density Comparison](figures/figure2_variant_density.png)
 
