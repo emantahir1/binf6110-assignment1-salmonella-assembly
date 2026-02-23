@@ -81,6 +81,14 @@ Variants were classified as SNPs (single nucleotide polymorphisms), insertions, 
 
 Assembly quality metrics were visualized using R v4.3.1 with ggplot2 and patchwork packages. Coverage and variant distributions were plotted to assess genome-wide patterns. Individual variants were examined in Integrative Genomics Viewer (IGV v2.16) by loading the reference genome, BAM alignment file, and VCF variant file.
 
+### Gene Identification and Plasmid Characterization
+
+Variants within coding sequences were mapped to gene features using the NCBI Reference Sequence annotation for *Salmonella enterica* subsp. enterica serovar Typhimurium str. LT2 (NC_003197.2). Gene boundaries and functional annotations were obtained from the NCBI Genome Browser to identify coding sequences containing elevated variant densities.
+
+Read length distributions were compared between plasmid- and chromosome-mapping reads to assess whether elevated plasmid coverage resulted from size-based sequencing bias. Read lengths were extracted from BAM alignments using samtools and mean values calculated for each reference contig.
+
+The assembled plasmid contig was identified using BLASTn (v2.13.0) against the NCBI nucleotide collection (nr/nt) database. The query sequence (contig_4, 109 kb) was submitted via the NCBI web interface with default parameters. The top-scoring alignment was used to determine plasmid identity and distinguish the assembled plasmid from the reference pSLT plasmid (NC_003277.2).
+
 ---
 
 ## 3. Results
