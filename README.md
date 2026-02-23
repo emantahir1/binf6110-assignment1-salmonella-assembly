@@ -141,26 +141,15 @@ In stark contrast, the plasmid harbored 7,067 variants across only 0.09 Mb, prod
 | Insertions | 52 (1.2%) | 73 (1.0%) | 125 (1.1%) |
 | Deletions | 25 (0.6%) | 13 (0.2%) | 38 (0.3%) |
 
-### Visual Inspection of Variants
+### Visual Validation of Variants
 
-Genome-wide visualization in IGV confirmed relatively sparse variant distribution across the chromosome with clusters of moderate density in certain regions (Figure 4). Coverage depth appears uniform across most of the chromosome, consistent with alignment statistics (Figure 2B).
+Variant calling identified 11,465 total variants across the genome, with 98.6% being SNPs (11,302), 1.1% insertions (125), and 0.3% deletions (38). Visual examination in Integrative Genomics Viewer (IGV v2.16) confirmed that chromosomal variants are distributed across the genome with regional clustering patterns. To validate variant calling accuracy and assess read-level support, a representative high-density variant region within the *lpcA* gene was examined in detail (Figure 3).
 
-![figure4\_genome\_coverage](https://github.com/user-attachments/assets/0f823772-bfd9-4962-a841-43c2cbed2637)
+![Figure 3: Variant Cluster Detail](figures/figure3_variant_cluster.png)
 
-**Figure 4:** Genome-Wide Coverage and Variant Distribution. IGV visualization of chromosome NC_003197.2 showing variant positions (top track) and coverage depth (middle track). Variants are distributed across the chromosome with some regional clustering. Coverage remains relatively uniform at ~150× depth across most positions.
+**Figure 3: Base-level visualization of variants within the *lpcA* gene (NC_003197.2:64,090-64,140).** Individual sequencing reads are shown as gray bars with variant positions highlighted as colored letters (orange = G, red = T, blue = C, green = A). Six SNPs are visible within a 36 bp window: C→G (position 64,100), C→T (64,106), G→T (64,107), C→G (64,124), T→C (64,125), and T→G (64,126). Multiple independent reads show consistent variant calls at each position, distinguishing genuine sequence polymorphisms from random sequencing errors. The coverage track shows uniform depth (~200×) across the region. Purple 'I' markers indicate small insertions. This clustering of six variants within 36 bp (16.7 variants/100 bp) represents substantially elevated local variant density compared to the genome-wide chromosomal average (0.9 variants/kb), suggesting this gene may be under diversifying selection or involved in strain-specific adaptation.
 
-Detailed examination of a variant-rich chromosomal region (2.36-2.37 Mb) revealed multiple well-supported SNPs with high read coverage (Figure 5). Individual variant sites show consistent support from multiple overlapping reads, indicating genuine sequence differences rather than sequencing errors.
-
-![figure5\_variant\_region](https://github.com/user-attachments/assets/0367ded6-1a26-412a-a011-c67110e0a063)
-
-**Figure 5:** Variant-Rich Chromosomal Region. IGV view of NC_003197.2 positions 2,360,000-2,365,000 showing multiple SNPs (purple 'I' markers in alignment tracks) supported by consistent read evidence. Coverage track shows uniform depth (~150×) across the region.
-
-High-resolution inspection of individual variants confirmed base-level support for variant calls (Figure 6). At position 2,363,040, a clear 4bp insertion is visible with consistent support from all overlapping reads. Additional variants at nearby positions show clean SNP patterns (T→G, G→T, T→A), validating the quality of variant calls.
-
-![figure6\_variant\_detail](https://github.com/user-attachments/assets/198c6f1e-7faf-4dfd-bb46-0b7d9cd6b31d)
-
-**Figure 6:** Single Variant Detail View. IGV visualization at nucleotide resolution showing a 4bp insertion near position 2,363,040. The alignment shows consistent support for the insertion (purple bars) and alternative alleles across multiple reads with high base quality, validating these as true biological variants rather than sequencing errors.
-
+The *lpcA* gene encodes a phosphoethanolamine transferase involved in lipopolysaccharide (LPS) modification, a critical component of the Gram-negative outer membrane that influences host immune recognition and antimicrobial resistance. Without protein-level annotation, the precise functional impact of these variants (missense versus synonymous) cannot be determined from nucleotide sequence alone. However, the elevated variant density within *lpcA* compared to genome-wide background suggests potential functional divergence in surface antigen presentation or polymyxin resistance between this strain and the reference LT2. Complete assessment would require gene annotation via Prokka followed by variant effect prediction using SnpEff or similar tools to classify each substitution and predict phenotypic consequences.
 ---
 
 ## 4. Discussion
