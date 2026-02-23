@@ -109,7 +109,7 @@ The Flye assembler produced a high-quality draft genome consisting of 3 contigs 
 
 Alignment of raw reads to the *S. enterica* LT2 reference genome revealed substantial differences in coverage between chromosome and plasmid (Table 1). The reference chromosome achieved near-complete breadth of coverage (97.8%) with high mean depth (151×) and mapping quality (MAPQ 60), indicating reliable alignment across nearly the entire chromosomal sequence. In contrast, the reference plasmid pSLT showed only 43.1% breadth of coverage despite adequate depth in aligned regions, with lower mapping quality (MAPQ 45). This fragmented coverage pattern strongly suggests the plasmid in the sequenced strain differs substantially from the pSLT reference.
 
-**Table 1:** Alignment statistics for reads mapped to reference genome
+**Table 2:** Alignment statistics for reads mapped to reference genome
 
 | Metric | Chromosome (NC_003197.2) | Plasmid (NC_003277.2) |
 |--------|-------------------------|----------------------|
@@ -122,13 +122,24 @@ The chromosome's high coverage and mapping quality indicate that the sequenced s
 
 ### Variant Distribution and Density
 
-Variant calling identified 11,465 total variants across the genome, with 98.6% being SNPs (11,302), 1.1% insertions (125), and 0.3% deletions (38) (Figure 3C). However, variant distribution was highly uneven between chromosome and plasmid. The chromosome contained 4,398 variants across 4.86 Mb, yielding a density of 0.9 variants per kb (Figure 3A,B). This low variant density is consistent with strain-level polymorphism relative to the reference LT2 strain.
+Variant calling identified 11,465 total variants across the genome, with 98.6% being SNPs (11,302), 1.1% insertions (125), and 0.3% deletions (38). However, variant distribution was highly uneven between chromosome and plasmid. The chromosome contained 4,398 variants across 4.86 Mb, yielding a density of 0.9 variants per kb. This low variant density is consistent with strain-level polymorphism relative to the reference LT2 strain.
 
-In stark contrast, the plasmid harbored 7,067 variants across only 0.09 Mb, producing an extraordinary variant density of 78.52 variants per kb—87-fold higher than the chromosome (Figure 3B). This extreme plasmid variant density, combined with fragmented coverage (Figure 2A), strongly suggests the assembled plasmid represents a divergent incompatibility group rather than genuine point mutations across pSLT.
+In stark contrast, the plasmid harbored 7,067 variants across only 0.09 Mb, producing an extraordinary variant density of 78.52 variants per kb—87-fold higher than the chromosome (Figure 2). This extreme plasmid variant density, combined with fragmented coverage (Table 1), strongly suggests the assembled plasmid represents a divergent incompatibility group rather than genuine point mutations across pSLT.
 
-![figure3\_variants\_final](https://github.com/user-attachments/assets/23a00b7c-0eaa-4cdf-b992-1abfd2a19cb1)
+![Figure 2: Variant Density Comparison](figures/figure2_variant_density.png)
 
-**Figure 3:** Variant Landscape Analysis. Variant calling using Bcftools identified 11,465 total variants genome-wide. (A) Total variant counts show 4,398 on chromosome and 7,067 on plasmid despite the plasmid being 54× smaller. (B) Variant density reveals 0.9 variants/kb on chromosome but 78.52 variants/kb on plasmid—an 87-fold difference indicating plasmid divergence rather than true polymorphism. (C) Genome-wide variant composition is 98.6% SNPs. (D) Variant type distribution by contig shows SNPs dominate in both chromosome and plasmid.
+**Figure 2: Variant Density by Contig.** The plasmid shows dramatically higher variant density (78.52 variants/kb) compared to the chromosome (0.9 variants/kb), representing an 87-fold difference. This extreme density is biologically implausible as true polymorphism and instead reflects misalignment when forcing reads from a divergent plasmid onto an incorrect reference (pSLT).
+
+**Table 3: Variant Summary**
+
+| Metric | Chromosome | Plasmid | Total |
+|--------|-----------|---------|-------|
+| Total variants | 4,398 | 7,067 | 11,465 |
+| Genome length | 4.86 Mb | 0.09 Mb | 4.95 Mb |
+| Variant density | 0.9/kb | 78.52/kb | - |
+| SNPs | 4,321 (98.2%) | 6,981 (98.8%) | 11,302 (98.6%) |
+| Insertions | 52 (1.2%) | 73 (1.0%) | 125 (1.1%) |
+| Deletions | 25 (0.6%) | 13 (0.2%) | 38 (0.3%) |
 
 ### Visual Inspection of Variants
 
