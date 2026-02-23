@@ -22,8 +22,8 @@ echo "======================================"
 # - minimap2
 # - samtools
 # - bcftools
-# - seqtk
-# - R with tidyverse, ggplot2, patchwork
+# - seqkit
+# - R (base R graphics only, no additional packages required)
 
 # ==============================================================================
 # STEP 0: ENVIRONMENT SETUP
@@ -205,17 +205,13 @@ echo ""
 echo "Step 6: Generating Visualizations"
 echo "=================================="
 
-echo "Creating Figure 1: Assembly Quality Assessment..."
-Rscript scripts/figure1_assembly.R
+echo "Creating Figure 1: Assembly Topology..."
+Rscript scripts/figure1_topology.R
 
-echo "Creating Figure 2: Reference Alignment Quality..."
-Rscript scripts/figure2_alignment.R
-
-echo "Creating Figure 3: Variant Landscape Analysis..."
-Rscript scripts/figure3_variants.R
+echo "Creating Figure 2: Variant Density Comparison..."
+Rscript scripts/figure2_variant_density.R
 
 echo "All figures generated successfully!"
-
 # ==============================================================================
 # STEP 7: IGV VISUALIZATION (MANUAL STEP)
 # ==============================================================================
@@ -251,15 +247,16 @@ echo "    - reads_variants.vcf (11,465 variants)"
 echo "    - variant_data.txt (processed variant data)"
 echo ""
 echo "  Figures:"
-echo "    - figures/figure1_assembly_final.png"
-echo "    - figures/figure2_alignment_final.png"
-echo "    - figures/figure3_variants_final.png"
+echo "    - figures/figure1_topology.png"
+echo "    - figures/figure2_variant_density.png"
+echo "    - figures/figure3_variant_cluster.png (from IGV)"
 echo ""
 echo "Key Results:"
 echo "  - Assembly: 3 contigs, N50 = 3.32 Mb, mean coverage = 160×"
 echo "  - Alignment: 97.8% chromosome coverage, 151× depth"
 echo "  - Variants: $TOTAL_VARIANTS total ($SNP_COUNT SNPs, $INS_COUNT insertions, $DEL_COUNT deletions)"
-echo "  - Plasmid variant density: 87× higher than chromosome"
+echo "  - Plasmid identified: pSAL4445-1 (99.99% identity)"
+echo "  - Plasmid variant density: 87× higher than chromosome (misalignment artifact)"
 echo ""
 echo "For full analysis and interpretation, see:"
 echo "  BINF6110_Assignment1_Part2_FINAL.md"
