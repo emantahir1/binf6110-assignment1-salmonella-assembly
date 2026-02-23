@@ -227,33 +227,39 @@ This analysis successfully assembled and characterized a Salmonella enterica gen
 
 ## 6. References
 
-Andino, A., & Hanning, I. (2015). *Salmonella enterica*: Survival, Colonization, and Virulence Differences among Serovars. *The Scientific World Journal*, 2015(520179), 1–16. [https://pmc.ncbi.nlm.nih.gov/articles/PMC4310208/](https://pmc.ncbi.nlm.nih.gov/articles/PMC4310208/)
+Andino, A., & Hanning, I. (2015). Salmonella enterica: Survival, Colonization, and Virulence Differences among Serovars. The Scientific World Journal, 2015(520179), 1–16. https://pmc.ncbi.nlm.nih.gov/articles/PMC4310208/
 
-Basantani, M. K., Gupta, D., Mehrotra, R., Mehrotra, S., Vaish, S., & Singh, A. (2017). An update on bioinformatics resources for plant genomics research. *Current Plant Biology*, 11–12, 33–40. [https://doi.org/10.1016/j.cpb.2017.12.002](https://doi.org/10.1016/j.cpb.2017.12.002)
+Basantani, M. K., Gupta, D., Mehrotra, R., Mehrotra, S., Vaish, S., & Singh, A. (2017). An update on bioinformatics resources for plant genomics research. Current Plant Biology, 11–12, 33–40. https://doi.org/10.1016/j.cpb.2017.12.002
 
-Dele Ogunremi, J., Devenish, J., Amoako, K. K., Kelly, H., Dupras, A. A., Bélanger, S., & Wang, L. R. (2014). High resolution assembly and characterization of genomes of Canadian isolates of *Salmonella Enteritidis*. *BMC Genomics*, 15(1), 713. [https://doi.org/10.1186/1471-2164-15-713](https://doi.org/10.1186/1471-2164-15-713)
+Dele Ogunremi, J., Devenish, J., Amoako, K. K., Kelly, H., Dupras, A. A., Bélanger, S., & Wang, L. R. (2014). High resolution assembly and characterization of genomes of Canadian isolates of Salmonella Enteritidis. BMC Genomics, 15(1), 713. https://doi.org/10.1186/1471-2164-15-713
 
-Freire, B., Ladra, S., & Paramá, J. R. (2022). Memory-Efficient Assembly Using Flye. *IEEE/ACM Transactions on Computational Biology and Bioinformatics*, 19(6), 3564–3577. [https://doi.org/10.1109/tcbb.2021.3108843](https://doi.org/10.1109/tcbb.2021.3108843)
+Freire, B., Ladra, S., & Paramá, J. R. (2022). Memory-Efficient Assembly Using Flye. IEEE/ACM Transactions on Computational Biology and Bioinformatics, 19(6), 3564–3577. https://doi.org/10.1109/tcbb.2021.3108843
 
-Heng Li. (2020). *lh3/seqtk*. GitHub. [https://github.com/lh3/seqtk](https://github.com/lh3/seqtk)
+Heng Li. (2020). lh3/seqtk. GitHub. https://github.com/lh3/seqtk
 
-Hu, T., Chitnis, N., Monos, D., & Dinh, A. (2021). Next-generation sequencing technologies: An overview. *Human Immunology*, 82(11). [https://doi.org/10.1016/j.humimm.2021.02.012](https://doi.org/10.1016/j.humimm.2021.02.012)
+Hu, T., Chitnis, N., Monos, D., & Dinh, A. (2021). Next-generation sequencing technologies: An overview. Human Immunology, 82(11). https://doi.org/10.1016/j.humimm.2021.02.012
 
-igvteam. (2025). *igvteam/igv-docs*. GitHub. [https://github.com/igvteam/igv-docs](https://github.com/igvteam/igv-docs)
+igvteam. (2025). igvteam/igv-docs. GitHub. https://github.com/igvteam/igv-docs
 
-Johnson, R., Ravenhall, M., Pickard, D., Dougan, G., Byrne, A., & Frankel, G. (2017). Comparison of *Salmonella enterica* Serovars Typhi and Typhimurium Reveals Typhoidal Serovar-Specific Responses to Bile. *Infection and Immunity*, 86(3). [https://doi.org/10.1128/iai.00490-17](https://doi.org/10.1128/iai.00490-17)
+Johnson, R., Ravenhall, M., Pickard, D., Dougan, G., Byrne, A., & Frankel, G. (2017). Comparison of Salmonella enterica Serovars Typhi and Typhimurium Reveals Typhoidal Serovar-Specific Responses to Bile. Infection and Immunity, 86(3). https://doi.org/10.1128/iai.00490-17
 
-Knodler, L. A., & Elfenbein, J. R. (2019). *Salmonella enterica*. *Trends in Microbiology*, 27(11), 964–965. [https://doi.org/10.1016/j.tim.2019.05.002](https://doi.org/10.1016/j.tim.2019.05.002)
+Knodler, L. A., & Elfenbein, J. R. (2019). Salmonella enterica. Trends in Microbiology, 27(11), 964–965. https://doi.org/10.1016/j.tim.2019.05.002
 
-Kolmogorov, M. (2024). *Flye: De novo assembler for single-molecule sequencing reads*. GitHub. [https://github.com/mikolmogorov/Flye](https://github.com/mikolmogorov/Flye)
+Kolmogorov, M. (2024). Flye: De novo assembler for single-molecule sequencing reads. GitHub. https://github.com/mikolmogorov/Flye
 
-Li, H. (2022). *lh3/minimap2*. GitHub. [https://github.com/lh3/minimap2](https://github.com/lh3/minimap2)
+Laidlaw, A., Blondin-Brosseau, M., Shay, J. A., Dussault, F., Rao, M., Petronella, N., & Tamber, S. (2024). Variation in plasmid conjugation among nontyphoidal Salmonella enterica serovars. Canadian Journal of Microbiology, 70(12), e2024-0164. https://doi.org/10.1139/cjm-2024-0164
 
-Oxford Nanopore Technologies. (2020). R10.3: the newest nanopore for high accuracy nanopore sequencing – now available in store. [https://nanoporetech.com/news/news-r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store](https://nanoporetech.com/news/news-r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store)
+Li, H. (2022). lh3/minimap2. GitHub. https://github.com/lh3/minimap2
 
-samtools. (2020). *samtools/samtools*. GitHub. [https://github.com/samtools/samtools](https://github.com/samtools/samtools)
+McClelland, M., Sanderson, K. E., Spieth, J., Clifton, S. W., Latreille, P., Courtney, L., Porwollik, S., Ali, J., Dante, M., Du, F., Hou, S., Layman, D., Leonard, S., Nguyen, C., Scott, K., Holmes, A., Grewal, N., Mulvaney, E., Ryan, E., Sun, H., Florea, L., Miller, W., Stoneking, T., Nhan, M., Waterston, R., & Wilson, R. K. (2001). Complete genome sequence of Salmonella enterica serovar Typhimurium LT2. Nature, 413(6858), 852–856. https://doi.org/10.1038/35101614
 
-Schiffer, A. M., Rahman, A., Sutton, W., Putnam, M. L., & Weisberg, A. J. (2025). A comparison of short- and long-read whole-genome sequencing for microbial pathogen epidemiology. *mSystems*, 10(12), e01426-25. [https://doi.org/10.1128/msystems.01426-25](https://doi.org/10.1128/msystems.01426-25)
+Oxford Nanopore Technologies. (2020). R10.3: the newest nanopore for high accuracy nanopore sequencing – now available in store. https://nanoporetech.com/news/news-r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store
+
+Robertson, J., Schonfeld, J., Bessonov, K., Bastedo, P., & Nash, J. H. E. (2023). A global survey of Salmonella plasmids and their associations with antimicrobial resistance. Microbial Genomics, 9(5), 001002. https://doi.org/10.1099/mgen.0.001002
+
+samtools. (2020). samtools/samtools. GitHub. https://github.com/samtools/samtools
+
+Schiffer, A. M., Rahman, A., Sutton, W., Putnam, M. L., & Weisberg, A. J. (2025). A comparison of short- and long-read whole-genome sequencing for microbial pathogen epidemiology. mSystems, 10(12), e01426-25. https://doi.org/10.1128/msystems.01426-25
 
 ## Software and Tools
 
