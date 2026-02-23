@@ -157,55 +157,60 @@ The *lpcA* gene encodes a phosphoethanolamine transferase involved in lipopolysa
 
 ### Assembly Quality and Completeness
 
-The Flye assembly successfully reconstructed the Salmonella enterica genome into three contigs totaling 5.10 Mb with excellent contiguity (N50 = 3.32 Mb). The chromosome remains fragmented into two linear contigs, likely separated by a repetitive region that was filtered during assembly due to low coverage (25× at the junction). This is a common limitation of long-read assemblers when encountering highly repetitive DNA or collapsed repeats. Despite fragmentation, the assembly covers 97.8% of the reference chromosome with high fidelity.
+The Flye assembly successfully reconstructed the *Salmonella enterica* genome into three contigs totaling 5.10 Mb with excellent contiguity (N50 = 3.32 Mb). The chromosome remains fragmented into two linear contigs, likely separated by a repetitive region that was filtered during assembly due to low coverage (25× at the junction). This is a common limitation of long-read assemblers when encountering highly repetitive DNA or collapsed repeats. Despite fragmentation, the assembly covers 97.8% of the reference chromosome with high fidelity.
 
-High sequencing coverage (160× mean) provided robust support for both assembly and variant calling. The 245× coverage on the circular plasmid contig suggests either higher copy number or preferential sequencing of smaller DNA fragments. Detection of circularity for the plasmid contig confirms successful assembly of an autonomous replicon.
+High sequencing coverage (160× mean) provided robust support for both assembly and variant calling. The 245× coverage on the circular plasmid contig initially suggested either higher copy number or preferential sequencing of smaller DNA fragments. To investigate this, read lengths were compared between plasmid- and chromosome-mapping reads. Analysis showed plasmid reads averaged 4,113 bp compared to 3,968 bp for chromosome reads (difference of 145 bp, 3.7%). This minimal difference indicates the elevated plasmid coverage reflects genuine multicopy plasmid maintenance rather than size-based sequencing bias, consistent with typical plasmid copy numbers in *Salmonella* (3-10 copies per chromosome). Detection of circularity for the plasmid contig confirms successful assembly of an autonomous replicon.
 
 ### Chromosomal Variants: Strain-Level Polymorphism
 
-The 4,398 chromosomal variants (0.9 per kb) represent genuine strain-level differences between the sequenced isolate and the reference LT2 strain. This level of divergence is consistent with intraspecies variation within S. enterica serovars (Robertson et al., 2023). The dominance of SNPs (98.6%) over indels reflects typical mutational patterns in bacterial evolution, where point mutations accumulate more frequently than insertion-deletion events.
+The 4,398 chromosomal variants (0.9 per kb) represent genuine strain-level differences between the sequenced isolate and the reference LT2 strain. This level of divergence is consistent with intraspecies variation within *S. enterica* serovars (Robertson et al., 2023). The dominance of SNPs (98.6%) over indels reflects typical mutational patterns in bacterial evolution, where point mutations accumulate more frequently than insertion-deletion events.
 
-IGV visualization confirmed that chromosomal variants are well-supported by multiple reads with high mapping quality (MAPQ 60), distinguishing true polymorphisms from sequencing errors. Variants appear distributed across the chromosome with some regional clustering, possibly reflecting horizontal gene transfer events, mobile elements, or regions under diversifying selection.
+Visual inspection of a representative variant-rich region revealed six SNPs clustered within a 36 bp window of the *lpcA* gene (Figure 3), representing 16.7 variants per 100 bp—nearly 20-fold higher than the genome-wide chromosomal average. The *lpcA* gene encodes a phosphoethanolamine transferase that modifies lipopolysaccharide, a key determinant of host immune recognition and polymyxin resistance in Gram-negative bacteria. The elevated variant density within this gene may reflect strain-specific adaptation in surface antigen structure or antimicrobial resistance profiles. 
+
+However, without protein-level annotation and variant effect prediction, it is not possible to determine whether these six substitutions represent missense mutations (amino acid changes), synonymous mutations (silent), or a mixture of both. This limitation highlights the importance of incorporating structural annotation (via Prokka or RAST) and variant effect prediction (via SnpEff or VEP) in bacterial genomic analyses. Future work should annotate all coding sequences and systematically classify the functional impact of the 4,398 chromosomal variants identified in this strain. Regional variant clustering, such as observed in *lpcA*, may indicate genes involved in host adaptation, immune evasion, or antimicrobial resistance that differ between this isolate and the reference LT2 strain.
 
 ### Plasmid Divergence: Evidence for a Different Incompatibility Group
 
 The most striking finding is the extreme plasmid divergence. Three independent lines of evidence demonstrate that the assembled plasmid is not pSLT but rather a different plasmid element:
 
-* Low reference coverage (43.1%): Less than half of pSLT aligns to the assembly, with large gaps indicating absent or highly divergent regions.
-* Extreme variant density (78.52 per kb, 87× higher than chromosome): This density is biologically implausible as true point mutations. Instead, it reflects misalignments when forcing reads from a divergent plasmid onto an incorrect reference.
-* Reduced mapping quality (MAPQ 45 vs 60): Lower confidence alignments indicate the aligner struggled to place plasmid reads, consistent with sequence divergence.
+1. **Low reference coverage (43.1%):** Less than half of pSLT aligns to the assembly, with large gaps indicating absent or highly divergent regions.
+2. **Extreme variant density (78.52 per kb, 87× higher than chromosome):** This density is biologically implausible as true point mutations. Instead, it reflects misalignments when forcing reads from a divergent plasmid onto an incorrect reference.
+3. **Reduced mapping quality (MAPQ 45 vs 60):** Lower confidence alignments indicate the aligner struggled to place plasmid reads, consistent with sequence divergence.
 
-McClelland et al. (2001) showed that pSLT is specific to certain S. enterica serovars and shares limited homology with plasmids from other serovars. Robertson et al. (2023) catalogued 1,044 distinct plasmid MOB-clusters across Salmonella, with 22% carrying antimicrobial resistance genes. The divergent plasmid in this strain likely belongs to a different incompatibility group or MOB-cluster.
+McClelland et al. (2001) showed that pSLT is specific to certain *S. enterica* serovars and shares limited homology with plasmids from other serovars. Robertson et al. (2023) catalogued 1,044 distinct plasmid MOB-clusters across *Salmonella*, with 22% carrying antimicrobial resistance genes. The divergent plasmid in this strain likely belongs to a different incompatibility group or MOB-cluster.
 
-The 109 kb assembled plasmid is larger than pSLT (94 kb), suggesting different gene content. Given that 88.3% of broad-host-range Salmonella plasmids are mobilizable (Robertson et al., 2023), this plasmid may play a role in horizontal gene transfer. Future work should annotate the assembled plasmid to identify resistance determinants, virulence factors, or mobile elements.
+### Plasmid Identification
+
+To identify the divergent plasmid, the assembled plasmid contig (109 kb) was queried against the NCBI nucleotide database using BLASTn. Results identified the plasmid as **pSAL4445-1** (accession AP023301.1), a 131 kb conjugative plasmid from *Salmonella enterica* subsp. enterica serovar 4,[5],12:i:- with 99.99% sequence identity across 100% query coverage. This confirms that the assembled plasmid is indeed distinct from the reference pSLT (94 kb, NC_003277.2) and explains both the absence of alignment to pSLT and the extreme apparent variant density (78.52 variants/kb) when reads were incorrectly mapped to the wrong reference.
+
+The pSAL4445-1 plasmid belongs to a different incompatibility group than pSLT and carries distinct gene content. Like pSLT, pSAL4445-1 is a large conjugative plasmid capable of horizontal transfer, but with different replicon architecture and potentially different cargo genes. Robertson et al. (2023) documented extensive plasmid diversity across *Salmonella* populations, with different serovars and strains carrying distinct plasmid complements. The presence of pSAL4445-1 rather than pSLT in this strain highlights the dynamic nature of plasmid populations within *Salmonella enterica* and underscores the importance of plasmid-level characterization in genomic surveillance.
 
 ### Workflow Strengths and Limitations
 
-#### Strengths
+**Strengths:**
+- High-quality long-read data (Q20+, 160× coverage) enabled robust assembly
+- Minimap2 alignment efficiently mapped 97.8% of chromosome with high confidence
+- Bcftools variant calling identified well-supported SNPs and indels
+- Successful plasmid identification via BLAST confirmed plasmid divergence hypothesis
+- Read length verification validated plasmid copy number interpretation
 
-* High-quality long-read data (Q20+, 160× coverage) enabled robust assembly
-* Minimap2 alignment efficiently mapped 97.8% of chromosome with high confidence
-* Bcftools variant calling identified well-supported SNPs and indels
-* Multi-scale visualization (genome-wide, regional, base-level) validated results
-
-#### Limitations
-
-* Chromosome remains fragmented due to repetitive sequences
-* Bcftools is a traditional variant caller; machine learning tools like Clair3 may improve sensitivity
-* Plasmid divergence prevented accurate variant characterization using the pSLT reference
-* No functional annotation was performed to interpret variant consequences
+**Limitations:**
+- Chromosome remains fragmented due to repetitive sequences
+- Bcftools is a traditional variant caller; machine learning tools like Clair3 may improve sensitivity
+- Plasmid divergence prevented accurate variant characterization using the pSLT reference
+- No functional annotation was performed to interpret variant consequences (missense vs synonymous)
+- Lack of gene annotation limited biological interpretation of chromosomal variants
 
 ### Biological and Clinical Implications
 
-The presence of a divergent plasmid has potential clinical relevance. Salmonella plasmids frequently carry antimicrobial resistance genes, and conjugative plasmids enable rapid dissemination across strains and serovars (Laidlaw et al., 2024). Robertson et al. (2023) documented multi-plasmid AMR outbreaks, emphasizing the importance of plasmid surveillance.
+The presence of pSAL4445-1, a large conjugative plasmid, has potential clinical relevance. *Salmonella* plasmids frequently carry antimicrobial resistance genes, and conjugative plasmids enable rapid dissemination across strains and serovars (Laidlaw et al., 2024). Robertson et al. (2023) documented multi-plasmid AMR outbreaks, emphasizing the importance of plasmid surveillance. The identification of pSAL4445-1 in this strain demonstrates that plasmid content can vary substantially even within closely related *Salmonella* isolates.
 
 Future experiments should:
-
-* Annotate the assembled plasmid to identify resistance and virulence genes
-* Determine plasmid incompatibility group and MOB-type
-* Assess conjugation potential and host range
-* Compare with plasmid databases to identify related elements
-
+- Annotate the assembled pSAL4445-1 plasmid to identify resistance determinants, virulence factors, and mobile elements
+- Compare pSAL4445-1 gene content with pSLT to identify strain-specific differences
+- Assess conjugation potential and host range of pSAL4445-1
+- Perform functional annotation of chromosomal variants using Prokka and variant effect prediction using SnpEff to determine biological impact of mutations in genes like *lpcA*
+- Investigate whether elevated variant density in *lpcA* correlates with altered LPS structure or polymyxin susceptibility
 ---
 
 ## 5. Conclusions
