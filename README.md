@@ -115,7 +115,7 @@ The Flye assembler produced a high-quality draft genome consisting of 3 contigs 
 
 ### Reference Alignment Quality
 
-Alignment of raw reads to the *S. enterica* LT2 reference genome revealed substantial differences in coverage between chromosome and plasmid (Table 1). The reference chromosome achieved near-complete breadth of coverage (97.8%) with high mean depth (151×) and mapping quality (MAPQ 60), indicating reliable alignment across nearly the entire chromosomal sequence. In contrast, the reference plasmid pSLT showed only 43.1% breadth of coverage despite adequate depth in aligned regions, with lower mapping quality (MAPQ 45). This fragmented coverage pattern strongly suggests the plasmid in the sequenced strain differs substantially from the pSLT reference.
+Alignment of raw reads to the *S. enterica* LT2 reference genome revealed substantial differences in coverage between chromosome and plasmid (Table 2). The reference chromosome achieved near-complete breadth of coverage (97.8%) with high mean depth (151×) and mapping quality (MAPQ 60), indicating reliable alignment across nearly the entire chromosomal sequence. In contrast, the reference plasmid pSLT showed only 43.1% breadth of coverage despite adequate depth in aligned regions, with lower mapping quality (MAPQ 45). This fragmented coverage pattern strongly suggests the plasmid in the sequenced strain differs substantially from the pSLT reference.
 
 **Table 2:** Alignment statistics for reads mapped to reference genome
 
@@ -151,13 +151,11 @@ In stark contrast, the plasmid harbored 7,067 variants across only 0.09 Mb, prod
 
 ### Visual Validation of Variants
 
-Variant calling identified 11,465 total variants across the genome, with 98.6% being SNPs (11,302), 1.1% insertions (125), and 0.3% deletions (38). Visual examination in Integrative Genomics Viewer (IGV v2.16) confirmed that chromosomal variants are distributed across the genome with regional clustering patterns. To validate variant calling accuracy and assess read-level support, a representative high-density variant region within the *lpcA* gene was examined in detail (Figure 3).
+To validate variant calling accuracy and assess read-level support, a representative high-density variant region within the *lpcA* gene was examined in detail using Integrative Genomics Viewer (IGV v2.16) (Figure 3).
 
 ![Figure 3: Variant Cluster Detail](figures/figure3_variant_cluster.png)
 
 **Figure 3: Base-level visualization of variants within the *lpcA* gene (NC_003197.2:64,090-64,140).** Individual sequencing reads are shown as gray bars with variant positions highlighted as colored letters (orange = G, red = T, blue = C, green = A). Six SNPs are visible within a 36 bp window: C→G (position 64,100), C→T (64,106), G→T (64,107), C→G (64,124), T→C (64,125), and T→G (64,126). Multiple independent reads show consistent variant calls at each position, distinguishing genuine sequence polymorphisms from random sequencing errors. The coverage track shows uniform depth (~200×) across the region. Purple 'I' markers indicate small insertions. This clustering of six variants within 36 bp (16.7 variants/100 bp) represents substantially elevated local variant density compared to the genome-wide chromosomal average (0.9 variants/kb), suggesting this gene may be under diversifying selection or involved in strain-specific adaptation.
-
-The *lpcA* gene encodes a phosphoethanolamine transferase involved in lipopolysaccharide (LPS) modification, a critical component of the Gram-negative outer membrane that influences host immune recognition and antimicrobial resistance. Without protein-level annotation, the precise functional impact of these variants (missense versus synonymous) cannot be determined from nucleotide sequence alone. However, the elevated variant density within *lpcA* compared to genome-wide background suggests potential functional divergence in surface antigen presentation or polymyxin resistance between this strain and the reference LT2. Complete assessment would require gene annotation via Prokka followed by variant effect prediction using SnpEff or similar tools to classify each substitution and predict phenotypic consequences.
 
 ---
 
@@ -257,28 +255,20 @@ samtools. (2020). *samtools/samtools*. GitHub. [https://github.com/samtools/samt
 
 Schiffer, A. M., Rahman, A., Sutton, W., Putnam, M. L., & Weisberg, A. J. (2025). A comparison of short- and long-read whole-genome sequencing for microbial pathogen epidemiology. *mSystems*, 10(12), e01426-25. [https://doi.org/10.1128/msystems.01426-25](https://doi.org/10.1128/msystems.01426-25)
 
-### Software and Tools
+## Software and Tools
 
-* **Flye v2.9.6** — Genome assembly
-  [https://github.com/fenderglass/Flye](https://github.com/fenderglass/Flye)
+**Core Analysis:**
+* Flye v2.9.6 - Genome assembly https://github.com/fenderglass/Flye
+* Minimap2 v2.30 - Read alignment https://github.com/lh3/minimap2
+* Samtools v1.22 - BAM file processing https://github.com/samtools/samtools
+* Bcftools v1.16 - Variant calling https://github.com/samtools/bcftools
 
-* **Minimap2 v2.30** — Read alignment
-  [https://github.com/lh3/minimap2](https://github.com/lh3/minimap2)
+**Visualization:**
+* IGV v2.16 - Genome visualization https://software.broadinstitute.org/software/igv/
+* R v4.3.1 - Statistical analysis and figure generation (base R graphics)
 
-* **Samtools v1.22** — BAM file processing
-  [https://github.com/samtools/samtools](https://github.com/samtools/samtools)
-
-* **Bcftools v1.16** — Variant calling
-  [https://github.com/samtools/bcftools](https://github.com/samtools/bcftools)
-
-* **IGV v2.16** — Genome visualization
-  [https://software.broadinstitute.org/software/igv/](https://software.broadinstitute.org/software/igv/)
-
-* **R v4.3.1** — Statistical analysis and visualization
-
-* **ggplot2 v4.0.2** — Data visualization
-
-* **patchwork v1.2.1** — Multi-panel figure assembly
+**Plasmid Identification:**
+* BLASTn v2.13.0 - Nucleotide sequence alignment https://blast.ncbi.nlm.nih.gov/
 
 All analyses were performed in a conda environment (binf6110_env) on Ubuntu 24.04.
 
