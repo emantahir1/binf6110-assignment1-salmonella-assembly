@@ -87,13 +87,23 @@ Assembly quality metrics were visualized using R v4.3.1 with ggplot2 and patchwo
 
 ### Assembly Quality
 
-The Flye assembler produced a high-quality draft genome consisting of 3 contigs with a total length of 5,104,813 bp (Figure 1A). The largest contig (contig_1) spans 3.32 Mb with 153× sequencing coverage, while contig_2 is 1.68 Mb with 169× coverage. A small circular contig (contig_4) of 109 kb with 245× coverage was identified, consistent with plasmid DNA. The assembly achieved an excellent N50 of 3.32 Mb, indicating high contiguity (Figure 1D).
+The Flye assembler produced a high-quality draft genome consisting of 3 contigs with a total length of 5,104,813 bp. Assembly topology analysis identified one circular contig consistent with an autonomous plasmid replicon, while two larger linear contigs represent chromosomal fragments likely separated by repetitive sequences (Figure 1).
 
-Topology analysis revealed one circular contig representing the plasmid element, while the two larger contigs remain linear, likely representing chromosomal fragments separated by repetitive regions (Figure 1C). Mean assembly coverage of 160× provides robust support for variant calling and structural analysis.
+![Figure 1: Assembly Topology](figures/figure1_topology.png)
 
-![figure1\_assembly\_final](https://github.com/user-attachments/assets/967a5499-ca5f-490d-b508-212d7b9b2785)
+**Figure 1: Assembly Topology.** De novo assembly produced 3 contigs: two linear contigs representing chromosomal fragments (contig_1: 3.32 Mb, 153× coverage; contig_2: 1.68 Mb, 169× coverage) and one circular contig representing the plasmid (contig_4: 0.11 Mb, 245× coverage). The assembly achieved an N50 of 3.32 Mb with mean coverage of 160×.
 
-**Figure 1:** Genome Assembly Quality Assessment. De novo assembly with Flye produced 3 contigs totaling 5.10 Mb. (A) Contig lengths show two large chromosomal contigs (3.32 Mb and 1.68 Mb) and one small plasmid (0.11 Mb). (B) Sequencing coverage per contig ranges from 153× to 245×, with highest coverage on the plasmid. (C) Topology analysis identified one circular contig (plasmid). (D) Assembly summary statistics demonstrate high quality with N50 = 3.32 Mb and mean coverage 160×.
+**Table 1: Assembly Statistics**
+
+| Metric | Value |
+|--------|-------|
+| Total length | 5.10 Mb |
+| Number of contigs | 3 |
+| Largest contig | 3.32 Mb |
+| N50 | 3.32 Mb |
+| Mean coverage | 160× |
+| Circular contigs | 1 (plasmid) |
+| Linear contigs | 2 (chromosome) |
 
 ### Reference Alignment Quality
 
