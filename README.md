@@ -97,13 +97,18 @@ Topology analysis revealed one circular contig representing the plasmid element,
 
 ### Reference Alignment Quality
 
-Alignment of raw reads to the S. enterica LT2 reference genome revealed substantial differences in coverage between chromosome and plasmid (Figure 2). The reference chromosome achieved 97.8% breadth of coverage with a mean depth of 151× and mapping quality (MAPQ) of 60, indicating high-confidence alignments across nearly the entire chromosome (Figure 2A,B,C). A total of 182,768 reads aligned to the chromosomal sequence (Figure 2D).
+Alignment of raw reads to the *S. enterica* LT2 reference genome revealed substantial differences in coverage between chromosome and plasmid (Table 1). The reference chromosome achieved near-complete breadth of coverage (97.8%) with high mean depth (151×) and mapping quality (MAPQ 60), indicating reliable alignment across nearly the entire chromosomal sequence. In contrast, the reference plasmid pSLT showed only 43.1% breadth of coverage despite adequate depth in aligned regions, with lower mapping quality (MAPQ 45). This fragmented coverage pattern strongly suggests the plasmid in the sequenced strain differs substantially from the pSLT reference.
 
-In contrast, the reference plasmid pSLT showed only 43.1% breadth of coverage despite adequate sequencing depth (82×) in aligned regions (Figure 2A,B). Mapping quality for plasmid-aligned reads was lower (MAPQ 45), and only 3,101 reads aligned to the plasmid reference (Figure 2C,D). This fragmented coverage pattern suggests the plasmid in the sequenced strain differs substantially from the pSLT reference.
+**Table 1:** Alignment statistics for reads mapped to reference genome
 
-![figure2\_alignment\_final](https://github.com/user-attachments/assets/934e7017-577f-4ea9-aa57-59dcbf82def8)
+| Metric | Chromosome (NC_003197.2) | Plasmid (NC_003277.2) |
+|--------|-------------------------|----------------------|
+| Coverage (%) | 97.8 | 43.1 |
+| Mean depth (×) | 151 | 82 |
+| Mean MAPQ | 60 | 45 |
+| Aligned reads | 182,768 | 3,101 |
 
-**Figure 2:** Reference Alignment Quality Assessment. Raw reads were aligned to the S. enterica LT2 reference genome (chromosome NC_003197.2 and plasmid NC_003277.2). (A) Reference genome coverage shows 97.8% for chromosome but only 43.1% for plasmid, indicating plasmid divergence. (B) Mean sequencing depth is 151× for chromosome and 82× for plasmid in covered regions. (C) Mapping quality scores are high for chromosome (MAPQ 60) but reduced for plasmid (MAPQ 45). (D) 182,768 reads aligned to chromosome compared to only 3,101 to plasmid.
+The chromosome's high coverage and mapping quality indicate that the sequenced strain is closely related to the LT2 reference. The plasmid's fragmented alignment and lower mapping quality, combined with the extreme variant density discussed below, provide strong evidence of plasmid divergence.
 
 ### Variant Distribution and Density
 
